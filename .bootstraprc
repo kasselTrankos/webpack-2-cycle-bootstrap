@@ -1,0 +1,20 @@
+{
+  // And JSON comments also!
+  "useFlexbox": true,
+  "bootstrapVersion": 4,
+  "styleLoaders": ["style-loader", "css-loader", "sass-loader"],
+
+  "styles": {
+    "mixins":true,
+    "normalize": true,
+    "print": true,
+    "reboot": true,
+    "type": true,
+    "images": true,
+    "code": true,
+    "grid": true,
+    "tables": true,
+    "forms": true,
+    "buttons": true
+  }
+}
