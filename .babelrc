@@ -4,5 +4,12 @@
     "stage-2"
   ],
   "plugins": [
+    ["cycle-hmr/xstream",
+      {
+      "include": ["**/app/**"],
+      "proxy": {
+        "debug": "info"
+      }
+   }]
   ]
 }

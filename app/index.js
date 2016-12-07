@@ -1,21 +1,18 @@
-import {run} from '@cycle/xstream-run';
-import {div, label, input, hr, h1, makeDOMDriver} from '@cycle/dom';
+import Cycle from '@cycle/xstream-run'
+import {makeDOMDriver} from '@cycle/dom'
+import {makeRouterDriver, supportsHistory} from 'cyclic-router'
+import {createHistory, createHashHistory} from 'history'
+import switchPath from 'switch-path'
 
-function main(sources) {
-  const sinks = {
-    DOM: sources.DOM.select('.myinput').events('input')
-      .map(ev => ev.target.value)
-      .startWith('')
-      .map(name =>
-        div('.form-group', [
-          label('Name:'),
-          input('.myinput .form-control', {attrs: {type: 'text'}}),
-          hr(),
-          h1(`Hola  ${name}`)
-        ])
-      )
-  };
-  return sinks;
-}
+// Local imports
+import main from './page/main'
 
-run(main, { DOM: makeDOMDriver('#app-container') });
+const history = supportsHistory() ? createHistory() : createHashHistory()
+
+const drivers =
+  {
+    DOM: makeDOMDriver('#app-container', {transposition: false}),
+    router: makeRouterDriver(history, switchPath)
+  }
+
+Cycle.run(main, drivers)
